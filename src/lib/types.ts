@@ -109,16 +109,6 @@ export interface WeekPlan extends WeekMeta {
   }
 }
 
-export interface HeartRateZone {
-  label: string
-  pctMin: number
-  pctMax: number
-  /** % of HRmax method. */
-  hrPctOfMax: [number, number]
-  /** Karvonen method, only present when hrRest is provided. */
-  hrKarvonen?: [number, number]
-}
-
 export interface Plan {
   meta: {
     goal: Goal

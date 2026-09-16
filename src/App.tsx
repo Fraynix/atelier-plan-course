@@ -84,7 +84,7 @@ function App() {
       </section>
 
       <section className="mb-11">
-        <PaceMemo vma={settings.vma} />
+        <PaceMemo vma={settings.vma} hrMax={settings.hrMax} hrRest={settings.hrRest} />
       </section>
 
       <Disclaimer />
