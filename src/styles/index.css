@@ -1,0 +1,118 @@
+@import 'tailwindcss';
+
+@theme {
+  --font-sans: 'Archivo', system-ui, sans-serif;
+  --font-serif: 'Newsreader', Georgia, serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, monospace;
+}
+
+/* Design tokens ported from the reference prototype (reference/atelier-plan-course.html) */
+:root {
+  --bg: #eef2f0;
+  --panel: #ffffff;
+  --panel-2: #f5f9f7;
+  --panel-3: #eaf1ed;
+  --ink: #15241c;
+  --ink-2: #3f5448;
+  --muted: #6f877b;
+  --line: #dae5df;
+  --line-2: #e9f0ec;
+  --brand: #1f9e63;
+  --brand-2: #177a4c;
+  --brand-soft: #dcf0e6;
+  --accent: #d9552f;
+  --accent-soft: #f8e3da;
+  --info: #0e6e9e;
+  --info-soft: #e0eff6;
+  --violet: #7a5cc0;
+  --violet-soft: #ece6f8;
+  --brick: #8a5316;
+  --brick-soft: #f0d9bf;
+  --bike: #215a86;
+  --bike-soft: #d6e8f4;
+  --code: #12433a;
+  --shadow: 0 1px 2px rgba(12, 40, 30, 0.06), 0 10px 26px -14px rgba(12, 40, 30, 0.18);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme='light']) {
+    --bg: #0e1512;
+    --panel: #161f1a;
+    --panel-2: #1b2621;
+    --panel-3: #202d27;
+    --ink: #e7efea;
+    --ink-2: #adbcb3;
+    --muted: #82948b;
+    --line: #293832;
+    --line-2: #22302a;
+    --brand: #37b078;
+    --brand-2: #54c48f;
+    --brand-soft: #10281d;
+    --accent: #ec8163;
+    --accent-soft: #331e18;
+    --info: #4bb2d6;
+    --info-soft: #0f2e3b;
+    --violet: #a58ee0;
+    --violet-soft: #241d33;
+    --brick: #d99a56;
+    --brick-soft: #3a2a16;
+    --bike: #6db3e0;
+    --bike-soft: #163244;
+    --code: #8fe0cd;
+    --shadow: 0 1px 2px rgba(0, 0, 0, 0.34), 0 12px 30px -16px rgba(0, 0, 0, 0.6);
+  }
+}
+
+:root[data-theme='dark'] {
+  --bg: #0e1512;
+  --panel: #161f1a;
+  --panel-2: #1b2621;
+  --panel-3: #202d27;
+  --ink: #e7efea;
+  --ink-2: #adbcb3;
+  --muted: #82948b;
+  --line: #293832;
+  --line-2: #22302a;
+  --brand: #37b078;
+  --brand-2: #54c48f;
+  --brand-soft: #10281d;
+  --accent: #ec8163;
+  --accent-soft: #331e18;
+  --info: #4bb2d6;
+  --info-soft: #0f2e3b;
+  --violet: #a58ee0;
+  --violet-soft: #241d33;
+  --brick: #d99a56;
+  --brick-soft: #3a2a16;
+  --bike: #6db3e0;
+  --bike-soft: #163244;
+  --code: #8fe0cd;
+  --shadow: 0 1px 2px rgba(0, 0, 0, 0.34), 0 12px 30px -16px rgba(0, 0, 0, 0.6);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  background: var(--bg);
+  color: var(--ink);
+  margin: 0;
+  font-family: var(--font-serif);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Visible focus ring everywhere, incl. custom controls */
+:focus-visible {
+  outline: 2px solid var(--brand);
+  outline-offset: 2px;
+}
+
+@media print {
+  .noprint {
+    display: none !important;
+  }
+  body {
+    background: #fff;
+  }
+}

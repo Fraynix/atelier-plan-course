@@ -1,0 +1,691 @@
+<title>Atelier plan de course</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&family=JetBrains+Mono:wght@500;700&display=swap">
+<style>
+  :root{
+    --bg:#eef2f0; --panel:#ffffff; --panel2:#f5f9f7; --panel3:#eaf1ed;
+    --ink:#15241c; --ink2:#3f5448; --muted:#6f877b; --line:#dae5df; --line2:#e9f0ec;
+    --brand:#1f9e63; --brand2:#177a4c; --brandsoft:#dcf0e6;
+    --accent:#d9552f; --accentsoft:#f8e3da;
+    --info:#0e6e9e; --infosoft:#e0eff6; --violet:#7a5cc0; --violetsoft:#ece6f8;
+    --code:#12433a;
+    --shadow:0 1px 2px rgba(12,40,30,.06),0 10px 26px -14px rgba(12,40,30,.18);
+    --maxw:960px;
+  }
+  @media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+    --bg:#0e1512; --panel:#161f1a; --panel2:#1b2621; --panel3:#202d27;
+    --ink:#e7efea; --ink2:#adbcb3; --muted:#82948b; --line:#293832; --line2:#22302a;
+    --brand:#37b078; --brand2:#54c48f; --brandsoft:#10281d;
+    --accent:#ec8163; --accentsoft:#331e18;
+    --info:#4bb2d6; --infosoft:#0f2e3b; --violet:#a58ee0; --violetsoft:#241d33;
+    --code:#8fe0cd;
+    --shadow:0 1px 2px rgba(0,0,0,.34),0 12px 30px -16px rgba(0,0,0,.6);
+  }}
+  :root[data-theme="dark"]{
+    --bg:#0e1512; --panel:#161f1a; --panel2:#1b2621; --panel3:#202d27;
+    --ink:#e7efea; --ink2:#adbcb3; --muted:#82948b; --line:#293832; --line2:#22302a;
+    --brand:#37b078; --brand2:#54c48f; --brandsoft:#10281d;
+    --accent:#ec8163; --accentsoft:#331e18;
+    --info:#4bb2d6; --infosoft:#0f2e3b; --violet:#a58ee0; --violetsoft:#241d33;
+    --code:#8fe0cd;
+    --shadow:0 1px 2px rgba(0,0,0,.34),0 12px 30px -16px rgba(0,0,0,.6);
+  }
+  *{box-sizing:border-box}
+  body{background:var(--bg); color:var(--ink); margin:0;
+    font-family:"Newsreader",Georgia,serif; font-size:17px; line-height:1.6; -webkit-font-smoothing:antialiased}
+  .wrap{max-width:var(--maxw); margin:0 auto; padding:0 20px 90px}
+  h1,h2,h3,.eyebrow,.lab,th,.btn,.tag,.pill,.stat,.fx{font-family:"Archivo",system-ui,sans-serif}
+  .mono,code{font-family:"JetBrains Mono",ui-monospace,monospace}
+  .eyebrow{font-size:12px; font-weight:700; letter-spacing:.16em; text-transform:uppercase; color:var(--brand); margin:0 0 9px}
+
+  header.hero{padding:50px 0 26px; border-bottom:1px solid var(--line); margin-bottom:34px}
+  .hero h1{font-size:clamp(34px,6vw,56px); font-weight:800; letter-spacing:-.02em; line-height:1; margin:0 0 8px; text-wrap:balance}
+  .hero h1 .em{color:var(--brand)}
+  .hero p{font-size:19px; color:var(--ink2); max-width:64ch; margin:0}
+  .hero p b{color:var(--ink); font-weight:600}
+
+  section{margin:0 0 44px}
+  h2{font-size:25px; font-weight:800; letter-spacing:-.015em; margin:0 0 4px; text-wrap:balance}
+  .lead{color:var(--ink2); margin:0 0 20px; max-width:68ch}
+  p{max-width:70ch}
+
+  .grid2{display:grid; grid-template-columns:1fr 1fr; gap:16px}
+  @media (max-width:760px){.grid2{grid-template-columns:1fr}}
+  .card{background:var(--panel); border:1px solid var(--line); border-radius:14px; padding:18px 20px; box-shadow:var(--shadow)}
+  .card h3{font-family:"Archivo",sans-serif; font-size:16px; font-weight:800; margin:0 0 6px; color:var(--ink)}
+  .card p{font-size:14.5px; color:var(--ink2); margin:0 0 10px}
+  .fx{display:block; background:var(--panel3); border:1px solid var(--line); border-left:3px solid var(--brand); border-radius:8px; padding:9px 12px; margin:8px 0; font-family:"JetBrains Mono",monospace; font-size:13px; color:var(--code); overflow-x:auto; white-space:nowrap}
+  .fx .c{color:var(--muted)}
+  .why{font-size:13px; color:var(--muted); margin-top:6px}
+  .why b{color:var(--ink2); font-weight:600}
+
+  /* generator */
+  .genwrap{background:var(--panel); border:1px solid var(--line); border-radius:16px; box-shadow:var(--shadow); overflow:hidden}
+  .genform{padding:20px 22px; background:var(--panel2); border-bottom:1px solid var(--line); display:grid; grid-template-columns:repeat(3,1fr); gap:14px 18px}
+  @media (max-width:760px){.genform{grid-template-columns:1fr 1fr}}
+  @media (max-width:480px){.genform{grid-template-columns:1fr}}
+  .field{display:flex; flex-direction:column; gap:5px}
+  .field label{font-family:"Archivo",sans-serif; font-size:11px; font-weight:700; letter-spacing:.05em; text-transform:uppercase; color:var(--muted)}
+  .field input,.field select{font-family:"Archivo",sans-serif; font-size:15px; font-weight:600; color:var(--ink); background:var(--panel); border:1.5px solid var(--line); border-radius:9px; padding:9px 11px; width:100%}
+  .field input:focus,.field select:focus{outline:none; border-color:var(--brand)}
+  .field .hint{font-size:11px; color:var(--muted); font-family:"Archivo",sans-serif; font-weight:500}
+  .chk{flex-direction:row; align-items:center; gap:8px; grid-column:1/-1}
+  .chk input{width:auto}
+  .chk label{text-transform:none; letter-spacing:0; font-size:13.5px; color:var(--ink2); font-weight:600}
+  .btnrow{grid-column:1/-1; display:flex; gap:10px; align-items:center; flex-wrap:wrap; margin-top:2px}
+  .btn{font-family:"Archivo",sans-serif; font-weight:800; font-size:14px; letter-spacing:.02em; color:#fff; background:var(--brand); border:0; border-radius:10px; padding:11px 20px; cursor:pointer}
+  .btn:hover{background:var(--brand2)}
+  .btn.sec{background:transparent; color:var(--brand2); border:1.5px solid var(--line)}
+  .genout{padding:20px 22px}
+
+  .summary{display:flex; flex-wrap:wrap; gap:10px; margin-bottom:18px}
+  .sc{background:var(--panel2); border:1px solid var(--line); border-radius:11px; padding:9px 14px; min-width:104px}
+  .sc .k{font-family:"Archivo",sans-serif; font-size:10px; letter-spacing:.08em; text-transform:uppercase; color:var(--muted); font-weight:700}
+  .sc .v{font-family:"Archivo",sans-serif; font-size:19px; font-weight:800; color:var(--ink)}
+  .sc .v small{font-size:.6em; color:var(--muted); font-weight:700}
+
+  .phaselegend{display:flex; flex-wrap:wrap; gap:12px; margin:4px 0 16px}
+  .phaselegend span{display:inline-flex; align-items:center; gap:6px; font-family:"Archivo",sans-serif; font-size:12px; font-weight:600; color:var(--ink2)}
+  .phaselegend i{width:11px; height:11px; border-radius:3px}
+  .ph-rep i{background:var(--muted)} .ph-fond i{background:var(--brand)} .ph-spe i{background:var(--info)} .ph-tap i{background:var(--accent)}
+
+  .tblwrap{overflow-x:auto; border:1px solid var(--line); border-radius:12px}
+  table.plan{width:100%; border-collapse:collapse; min-width:680px; background:var(--panel); font-size:13.5px}
+  table.plan th,table.plan td{text-align:left; padding:9px 11px; border-bottom:1px solid var(--line2); vertical-align:top}
+  table.plan thead th{font-family:"Archivo",sans-serif; font-size:10px; letter-spacing:.05em; text-transform:uppercase; color:var(--muted); background:var(--panel2); position:sticky; top:0}
+  table.plan td.wk{font-family:"Archivo",sans-serif; font-weight:800; white-space:nowrap}
+  table.plan .phbadge{display:inline-block; font-family:"Archivo",sans-serif; font-size:9.5px; font-weight:800; letter-spacing:.03em; text-transform:uppercase; padding:2px 6px; border-radius:4px; margin-top:3px}
+  .phbadge.rep{background:var(--panel3); color:var(--muted)}
+  .phbadge.fond{background:var(--brandsoft); color:var(--brand2)}
+  .phbadge.spe{background:var(--infosoft); color:var(--info)}
+  .phbadge.tap{background:var(--accentsoft); color:var(--accent)}
+  table.plan .work{color:var(--ink2)} table.plan .work b{color:var(--ink); font-weight:700}
+  table.plan .mono{font-size:12px; color:var(--brand2); font-weight:700}
+  table.plan tr.recovery td{background:var(--panel2)}
+  table.plan tr.race td{background:var(--brandsoft); font-weight:700}
+
+  /* reference tables */
+  table.ref{width:100%; border-collapse:collapse; background:var(--panel); font-size:13.5px; min-width:560px}
+  table.ref th,table.ref td{text-align:left; padding:8px 11px; border-bottom:1px solid var(--line2)}
+  table.ref thead th{font-family:"Archivo",sans-serif; font-size:10px; letter-spacing:.05em; text-transform:uppercase; color:var(--muted); background:var(--panel2)}
+  table.ref td.z{font-family:"Archivo",sans-serif; font-weight:800; color:var(--ink)}
+  table.ref td.n{font-family:"JetBrains Mono",monospace; font-weight:700; color:var(--brand2); white-space:nowrap}
+  table.ref td.u{color:var(--ink2)}
+
+  .note{background:var(--infosoft); border:1px solid color-mix(in srgb,var(--info) 30%, transparent); border-radius:11px; padding:12px 15px; font-size:13.5px; color:var(--ink2); margin-top:14px}
+  .note b{color:var(--ink)}
+  footer{border-top:1px solid var(--line); margin-top:44px; padding-top:20px; color:var(--muted); font-size:13px}
+
+  /* week detail panel */
+  .weekpanel{margin-top:18px; background:var(--panel); border:1px solid var(--line); border-radius:16px; box-shadow:var(--shadow); padding:18px 20px}
+  .wp-head{display:flex; align-items:center; gap:12px; flex-wrap:wrap; margin-bottom:12px}
+  .wp-lab{font-family:"Archivo",sans-serif; font-weight:800; font-size:15px; color:var(--ink)}
+  #weekpick{font-family:"Archivo",sans-serif; font-size:14px; font-weight:600; padding:8px 12px; border:1.5px solid var(--line); border-radius:9px; background:var(--panel2); color:var(--ink)}
+  .wd-head{display:flex; flex-wrap:wrap; gap:6px 14px; align-items:baseline; margin-bottom:6px}
+  .wd-title{font-family:"Archivo",sans-serif; font-weight:800; font-size:19px; color:var(--ink)}
+  .wd-meta{font-family:"Archivo",sans-serif; font-size:12.5px; color:var(--muted); font-weight:600}
+  .sess-card{display:flex; gap:12px; padding:12px 0; border-top:1px solid var(--line2)}
+  .sess-card:first-child{border-top:0}
+  .sess-badge{flex:none; width:78px; font-family:"Archivo",sans-serif; font-size:9.5px; font-weight:800; letter-spacing:.03em; text-transform:uppercase; padding:5px 6px; border-radius:6px; text-align:center; height:fit-content}
+  .b-long{background:var(--accentsoft); color:var(--accent)}
+  .b-quality{background:var(--infosoft); color:var(--info)}
+  .b-ef{background:var(--brandsoft); color:var(--brand2)}
+  .b-renfo{background:var(--violetsoft); color:var(--violet)}
+  .b-brick{background:#f0d9bf; color:#8a5316}
+  .b-bike{background:#d6e8f4; color:#215a86}
+  .b-race{background:var(--brand); color:#fff}
+  .sess-body{font-size:14px; color:var(--ink2)}
+  .sess-body .st{font-family:"Archivo",sans-serif; font-weight:700; color:var(--ink); display:block; font-size:14px; margin-bottom:2px}
+  .sess-body b{color:var(--ink); font-weight:700}
+  .wd-tip{margin-top:12px; font-size:12.5px; color:var(--muted)}
+  .plan.clickrows tbody tr{cursor:pointer}
+
+  /* explanation cards */
+  .explain{display:grid; grid-template-columns:1fr 1fr 1fr; gap:14px; margin-top:22px}
+  @media (max-width:760px){.explain{grid-template-columns:1fr}}
+  .xcard{background:var(--panel); border:1px solid var(--line); border-radius:14px; padding:16px 18px; box-shadow:var(--shadow); border-top:3px solid var(--brand)}
+  .xcard.b2{border-top-color:var(--violet)} .xcard.b3{border-top-color:#8a5316}
+  .xcard h3{font-family:"Archivo",sans-serif; font-size:15px; font-weight:800; margin:0 0 6px; color:var(--ink)}
+  .xcard p{font-size:13.5px; color:var(--ink2); margin:0; max-width:none}
+  .xcard p b{color:var(--ink); font-weight:700}
+
+  /* house schema */
+  figure.schema{margin:6px 0 18px; padding:0}
+  figure.schema svg{width:100%; max-width:640px; height:auto; display:block; margin:0 auto; color:var(--ink2)}
+  figure.schema figcaption{font-size:13px; color:var(--muted); margin-top:8px; text-align:center; max-width:60ch; margin-left:auto; margin-right:auto}
+
+  /* weekly calendar */
+  .cal{display:flex; flex-direction:column; gap:6px; margin-top:4px}
+  .cal-day{display:grid; grid-template-columns:92px 1fr; gap:12px; align-items:stretch; border:1px solid var(--line); border-radius:11px; overflow:hidden; background:var(--panel)}
+  .cal-day .dn{font-family:"Archivo",sans-serif; font-weight:800; font-size:12.5px; color:var(--ink); background:var(--panel2); padding:11px 12px; display:flex; align-items:center}
+  .cal-day.rest .dn{color:var(--muted)}
+  .cal-items{padding:9px 12px; display:flex; flex-direction:column; gap:9px}
+  .cal-rest{color:var(--muted); font-size:13px; font-family:"Archivo",sans-serif; font-weight:600; padding:11px 12px}
+  .ci{display:flex; gap:10px; align-items:flex-start}
+  .ci .sess-badge{width:72px}
+  .ci .cb{font-size:13.5px; color:var(--ink2)}
+  .ci .cb .st{font-family:"Archivo",sans-serif; font-weight:700; color:var(--ink); display:block; font-size:13.5px; margin-bottom:1px}
+  .ci .cb b{color:var(--ink); font-weight:700}
+
+  @media print{
+    .noprint{display:none!important}
+    body{background:#fff}
+    .wrap{max-width:none; padding:0}
+    header.hero{padding:12px 0 10px}
+    .genwrap,.weekpanel,.card,.tblwrap{box-shadow:none}
+    section{margin-bottom:16px}
+  }
+</style>
+
+<div class="wrap">
+  <header class="hero">
+    <p class="eyebrow">Atelier course à pied · Comprendre &amp; construire</p>
+    <h1>Ton atelier <span class="em">plan de course</span></h1>
+    <p>D'abord <b>comment marchent les formules</b> derrière tes allures. Ensuite un <b>générateur de plan</b> : tu entres ta distance, ton temps dispo et ton délai, il bâtit une trame de semaines avec les bonnes allures, les sorties longues et les séances mixtes.</p>
+  </header>
+
+  <!-- PART A : FORMULES -->
+  <section class="noprint">
+    <p class="eyebrow">1 · La logique des formules</p>
+    <h2>Tout part de la VMA</h2>
+    <p class="lead">La VMA (vitesse maximale aérobie) est l'ancre : c'est une vitesse mesurable, et chaque intensité d'entraînement s'exprime en <b>pourcentage</b> d'elle. On calcule une vitesse cible, puis on la traduit en allure et en temps par distance. Voici les quatre formules — et surtout <i>pourquoi</i> elles sont construites ainsi.</p>
+
+    <div class="grid2">
+      <div class="card">
+        <h3>① Vitesse cible</h3>
+        <p>On choisit une intensité en % de VMA, ce qui donne une vitesse en km/h.</p>
+        <span class="fx">vitesse = VMA × %  <span class="c">ex. 14 × 0,85 = 11,9 km/h</span></span>
+        <div class="why"><b>Pourquoi :</b> chaque % correspond à une zone physiologique (endurance, seuil, VMA). Piloter en % rend les allures transposables quand ta VMA progresse.</div>
+      </div>
+      <div class="card">
+        <h3>② Allure au km</h3>
+        <p>On convertit la vitesse (km/h) en allure (min/km).</p>
+        <span class="fx">allure (min/km) = 60 ÷ vitesse  <span class="c">60/11,9 = 5,04 → 5:02</span></span>
+        <span class="fx">en secondes : 3600 ÷ vitesse</span>
+        <div class="why"><b>Pourquoi :</b> 60 min dans une heure ; à 11,9 km/h tu couvres 1 km en 1/11,9 d'heure. La partie décimale (0,04) × 60 donne les secondes.</div>
+      </div>
+      <div class="card">
+        <h3>③ Temps sur une distance</h3>
+        <p>Pour le fractionné sur piste : le temps d'une répétition.</p>
+        <span class="fx">temps (s) = distance (m) × 3,6 ÷ vitesse</span>
+        <span class="fx">400 m → 1440 ÷ vitesse   <span class="c">·  1000 m → 3600 ÷ vitesse</span></span>
+        <div class="why"><b>Pourquoi :</b> vitesse en m/s = km/h ÷ 3,6 ; le temps = distance ÷ vitesse. Le « ×3,6 » fait juste le pont entre km/h et m/s.</div>
+      </div>
+      <div class="card">
+        <h3>④ Distance d'une répétition en temps</h3>
+        <p>Pour une séance type 30/30 : la distance couverte.</p>
+        <span class="fx">distance (m) = vitesse ÷ 3,6 × durée (s)</span>
+        <div class="why"><b>Pourquoi :</b> l'inverse de ③. À 14,7 km/h (105 %), en 30 s tu parcours 14,7/3,6 × 30 ≈ 122 m.</div>
+      </div>
+    </div>
+
+    <div class="note"><b>La logique d'ensemble :</b> les intensités faibles (65–80 % VMA) construisent le moteur aérobie et l'endurance ; le <b>seuil</b> (85–90 %) repousse le point où le corps s'acidifie — c'est le plus rentable sur 10 km à marathon ; la <b>VMA</b> (95–105 %) élève le plafond. La récup suit l'intensité : plus c'est court et rapide, plus la récup est longue (pour répéter la qualité) ; au seuil, la récup reste courte (pour maintenir le stimulus).</div>
+  </section>
+
+  <!-- PART A2 : LOGIQUE DU PLAN -->
+  <section>
+    <p class="eyebrow">2 · La logique du plan</p>
+    <h2>Comment se construit un programme</h2>
+    <p class="lead">Un plan se bâtit comme une maison : chaque étage repose sur celui du dessous. On ne pose pas le toit avant les fondations — chercher la vitesse sans base aérobie, c'est bâtir sur du sable (blessure, plateau).</p>
+    <figure class="schema">
+      <svg viewBox="0 0 720 470" role="img" aria-label="Le programme construit comme une maison : fondations (base aérobie), murs (travail spécifique), toit (affûtage), tenus par le mortier du renfo et de la récupération.">
+        <defs><marker id="up" markerWidth="9" markerHeight="9" refX="4.5" refY="7" orient="auto"><polygon points="4.5,0 9,9 0,9" fill="currentColor"/></marker></defs>
+        <line x1="70" y1="300" x2="650" y2="300" stroke="currentColor" stroke-opacity="0.35" stroke-width="1.5"/>
+        <rect x="180" y="300" width="360" height="46" rx="4" fill="var(--panel3)" stroke="currentColor" stroke-opacity="0.35" stroke-dasharray="4 3"/>
+        <text x="360" y="328" text-anchor="middle" font-size="13" font-family="Archivo,sans-serif" font-weight="700" fill="currentColor">Reprise &amp; base</text>
+        <rect x="200" y="250" width="320" height="50" rx="3" fill="var(--brand2)"/>
+        <text x="360" y="280" text-anchor="middle" font-size="13" font-family="Archivo,sans-serif" font-weight="700" fill="#ffffff">Fondation — endurance &amp; volume</text>
+        <rect x="225" y="196" width="270" height="54" rx="3" fill="var(--brand)"/>
+        <text x="360" y="227" text-anchor="middle" font-size="13" font-family="Archivo,sans-serif" font-weight="700" fill="#ffffff">Spécifique — seuil &amp; allure</text>
+        <polygon points="212,196 508,196 360,120" fill="var(--accent)"/>
+        <text x="360" y="176" text-anchor="middle" font-size="13" font-family="Archivo,sans-serif" font-weight="800" fill="#ffffff">Affûtage</text>
+        <text x="360" y="364" text-anchor="middle" font-size="11.5" font-family="Archivo,sans-serif" fill="currentColor" opacity="0.75">Ton niveau de départ (test VMA)</text>
+        <path d="M150,120 L142,120 L142,346 L150,346" fill="none" stroke="currentColor" stroke-opacity="0.5" stroke-width="1.5"/>
+        <text x="126" y="233" text-anchor="middle" font-size="11.5" font-family="Archivo,sans-serif" font-weight="700" fill="currentColor" transform="rotate(-90 126 233)">RENFO + RÉCUP</text>
+        <line x1="578" y1="346" x2="578" y2="128" stroke="currentColor" stroke-opacity="0.6" stroke-width="1.5" marker-end="url(#up)"/>
+        <text x="596" y="237" text-anchor="middle" font-size="11.5" font-family="Archivo,sans-serif" fill="currentColor" opacity="0.8" transform="rotate(-90 596 237)">on construit de bas en haut</text>
+      </svg>
+      <figcaption>On bâtit de bas en haut : d'abord la <b>base aérobie</b> (volume, endurance), puis le <b>travail spécifique</b> (seuil, allure de course), et seulement au sommet l'<b>affûtage</b> qui révèle la forme le jour J. Le <b>renfo</b> et la <b>récupération</b> (semaines d'assimilation) sont le mortier : sans eux, la maison se fissure — blessure ou plateau.</figcaption>
+    </figure>
+    <div class="two">
+      <div class="card"><h4>① Les fondations — la base</h4><p>La plus grosse partie du temps : <b>endurance fondamentale</b>, volume progressif, sorties longues. Elle développe le moteur aérobie sur lequel tout le reste s'appuie. Large et solide, sinon rien ne tient au-dessus.</p></div>
+      <div class="card"><h4>② Les murs — le spécifique</h4><p>Une fois la base posée, on érige le <b>travail spécifique</b> : seuil et allure de course, sortie longue mixte. C'est ce qui donne sa forme à la maison — la performance visée.</p></div>
+      <div class="card"><h4>③ Le toit — l'affûtage</h4><p>En dernier seulement : on réduit le volume pour <b>éliminer la fatigue</b> et révéler la forme le jour J. Poser le toit trop tôt (affûter avant d'avoir construit) ne sert à rien.</p></div>
+      <div class="card"><h4>Le mortier — renfo &amp; récup</h4><p>Le <b>renforcement</b> et les <b>semaines d'assimilation</b> lient l'ensemble et évitent les fissures (blessures). Invisibles mais structurels : on ne les zappe pas.</p></div>
+    </div>
+  </section>
+
+  <!-- PART B : GENERATEUR -->
+  <section>
+    <p class="eyebrow">3 · Le générateur</p>
+    <h2>Construis ton plan</h2>
+    <p class="lead">Renseigne les cases : le générateur découpe ton délai en phases (reprise → fondation → spécifique → affûtage), place la sortie longue et la séance de qualité, calcule les allures depuis ta VMA, et positionne les séances mixtes. C'est une <b>trame</b> à personnaliser, pas une vérité gravée.</p>
+
+    <div class="genwrap">
+      <div class="genform noprint">
+        <div class="field">
+          <label for="goal">Objectif</label>
+          <select id="goal">
+            <option value="5">5 km</option>
+            <option value="10">10 km</option>
+            <option value="21" selected>Semi-marathon</option>
+            <option value="42">Marathon</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="vma">VMA (km/h)</label>
+          <input id="vma" type="number" value="14" min="8" max="24" step="0.1">
+          <span class="hint">test demi-Cooper : distance 6 min ÷ 100</span>
+        </div>
+        <div class="field">
+          <label for="weeks">Semaines avant l'objectif</label>
+          <input id="weeks" type="number" value="12" min="4" max="30" step="1">
+          <span class="hint">ex. 3 mois ≈ 12</span>
+        </div>
+        <div class="field">
+          <label for="hours">Heures dispo / semaine</label>
+          <input id="hours" type="number" value="5" min="2" max="15" step="0.5">
+        </div>
+        <div class="field">
+          <label for="sessions">Séances course / semaine</label>
+          <input id="sessions" type="number" value="4" min="3" max="6" step="1">
+        </div>
+        <div class="field">
+          <label for="bike">Séances vélo / semaine</label>
+          <input id="bike" type="number" value="0" min="0" max="4" step="1">
+          <span class="hint">0 si tu ne fais que courir · déduit des heures dispo</span>
+        </div>
+        <div class="field">
+          <label for="level">Point de départ</label>
+          <select id="level">
+            <option value="1">Prudent (reprise)</option>
+            <option value="2" selected>Régulier</option>
+            <option value="3">Solide (déjà du volume)</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="restday">Jour de repos</label>
+          <select id="restday">
+            <option value="0" selected>Lundi</option><option value="1">Mardi</option><option value="2">Mercredi</option><option value="3">Jeudi</option><option value="4">Vendredi</option><option value="5">Samedi</option><option value="6">Dimanche</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="longday">Jour de sortie longue</label>
+          <select id="longday">
+            <option value="0">Lundi</option><option value="1">Mardi</option><option value="2">Mercredi</option><option value="3">Jeudi</option><option value="4">Vendredi</option><option value="5">Samedi</option><option value="6" selected>Dimanche</option>
+          </select>
+        </div>
+        <div class="field chk">
+          <input id="mixte" type="checkbox" checked>
+          <label for="mixte">Intégrer des enchaînements vélo→course (briques) &amp; séances mixtes — utile en triathlon &amp; pour absorber du volume sans traumatisme</label>
+        </div>
+        <div class="btnrow">
+          <button class="btn" id="gen">Générer le plan</button>
+          <button class="btn sec" id="reset">Réinitialiser</button>
+          <button class="btn sec" id="print">🖨 Imprimer / PDF</button>
+        </div>
+      </div>
+      <div class="genout" id="out"></div>
+    </div>
+
+    <div class="weekpanel" id="weekpanel" hidden>
+      <div class="wp-head"><span class="wp-lab">🔍 Détail d'une semaine</span><select id="weekpick"></select><span class="wd-meta">— ou clique une ligne du tableau</span></div>
+      <div id="weekdetail"></div>
+    </div>
+
+    <div class="explain noprint">
+      <div class="xcard">
+        <h3>Comment lire ton plan</h3>
+        <p>Chaque semaine combine <b>une sortie longue</b>, <b>une séance de qualité</b> (VMA puis seuil), des <b>footings faciles</b> et un <b>renfo</b>. On progresse 2–3 semaines, puis une <b>semaine d'assimilation</b> allégée laisse le corps se reconstruire plus fort. Plus la course approche, plus les séances <b>ressemblent à l'objectif</b> (allure spécifique, sortie longue mixte).</p>
+      </div>
+      <div class="xcard b2">
+        <h3>Pourquoi le renfo est obligatoire</h3>
+        <p>30 min par semaine, non négociables : le renforcement <b>prévient les blessures</b> (le premier facteur d'échec d'une prépa) en solidifiant tendons, hanches et chaîne postérieure. Il <b>évolue avec l'échéance</b> : force générale au début, prévention &amp; pliométrie légère en phase spécifique, gainage/mobilité en affûtage pour ne créer aucune fatigue.</p>
+      </div>
+      <div class="xcard b3">
+        <h3>Pourquoi les enchaînements (briques) comptent</h3>
+        <p>La « brique » = enchaîner <b>vélo puis course</b> sans pause. C'est <b>spécifique au triathlon</b> : elle apprend à tes jambes à courir sur la fatigue du vélo, entraîne la transition neuromusculaire, et ajoute du <b>volume aérobie sans le traumatisme</b> de la course seule. On la rapproche du réel à l'approche de la course, puis on l'allège pendant l'affûtage.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- PART C : REFERENCE -->
+  <section class="noprint">
+    <p class="eyebrow">4 · Le mémo</p>
+    <h2>Quelle allure sur quelle distance, quelle récup</h2>
+    <p class="lead">Les briques de séance, avec les allures calculées <b>en direct pour ta VMA</b> (change-la ci-dessus). C'est la réponse à « quelle allure viser sur X, avec combien de récup ».</p>
+    <div class="tblwrap">
+      <table class="ref" id="reftable">
+        <thead><tr><th>Type de séance</th><th>Longueur de rép.</th><th>% VMA</th><th>Ton allure</th><th>Récupération</th></tr></thead>
+        <tbody id="refbody"></tbody>
+      </table>
+    </div>
+    <div class="note"><b>Ancré sur tes blocs IDO :</b> tes prépas (semi de Barcelone, marathon de Paris) enchaînaient une <b>sortie longue</b>, une <b>séance de qualité</b> (VMA « en nature », seuil/SV2, puis « spé semi »), des <b>footings faciles</b> et des <b>séances mixtes</b>, le tout allégé une semaine sur trois puis un affûtage final. Le générateur reproduit cette structure.</div>
+  </section>
+
+  <footer>
+    <p>Outil de construction, à valider avec ta coach (Célia). Les allures dérivent de ta VMA et de %VMA classiques ; adapte-les à tes sensations et à ta FC. Les volumes sont des estimations à partir du temps disponible.</p>
+  </footer>
+</div>
+
+<script>
+(function(){
+  var $=function(id){return document.getElementById(id);};
+  function fmtPace(sec){var m=Math.floor(sec/60),s=Math.round(sec%60);if(s===60){m++;s=0;}return m+":"+(s<10?"0":"")+s;}
+  function paceAt(vma,pct){return 3600/(vma*pct);} // s/km
+  function repTime(vma,pct,dist){return dist*3.6/(vma*pct);} // s for dist(m)
+  // sortie longue à allures variées (blocs alternés) — la séance "mixte" d'approche
+  function longVaried(goal,km,vma,racePct){
+    var cfg={5:{w:1,f:1,wu:2,cd:2},10:{w:2,f:1,wu:3,cd:2},21:{w:2,f:1,wu:3,cd:2},42:{w:3,f:1,wu:4,cd:3}}[goal];
+    var floatPct=Math.max(0.70,racePct-0.05);
+    var avail=km-cfg.wu-cfg.cd;
+    var repLen=cfg.w+cfg.f;
+    var n=Math.max(2,Math.floor(avail/repLen));
+    var total=cfg.wu+cfg.cd+n*repLen;
+    var wp=fmtPace(paceAt(vma,racePct)), fp=fmtPace(paceAt(vma,floatPct));
+    return {km:total, html:'<b>'+total+' km — sortie longue mixte</b> (en continu, sans arrêt) : '+cfg.wu+' km EF (échauffement) + <b>'+n+' × ['+cfg.w+' km à '+wp+' <span style="color:var(--muted)">allure objectif</span> / '+cfg.f+' km à '+fp+' <span style="color:var(--muted)">récup active</span>]</b> + '+cfg.cd+' km EF (retour au calme)'};
+  }
+
+  var PLAN=null;
+  function renfoDesc(phase){
+    if(phase==='tap'||phase==='race') return {title:'Renfo léger — gainage & mobilité (15–20 min)', detail:'Gainage court + mobilité hanches/chevilles. On entretient, <b>zéro fatigue</b> avant la course.'};
+    if(phase==='spe') return {title:'Renfo — prévention & pliométrie (30 min)', detail:'Gainage + pliométrie légère (skippings, petits sauts) + proprioception cheville/hanche + excentrique mollets. Spécifique, sans courbatures avant les séances clés.'};
+    return {title:'Renfo — force générale (30 min)', detail:'Gainage (planche, latéral) + squats/fentes + chaîne postérieure (ischios, fessiers). Charge modérée. <b>Le socle anti-blessure.</b>'};
+  }
+  function brickDesc(phase){
+    if(phase==='spe') return {title:'Enchaînement vélo → course (brique)', detail:'50–70 min vélo (quelques accélérations) → 20–25 min course, dont ~10 min à allure objectif. Spécifique triathlon.'};
+    return {title:'Enchaînement vélo → course (brique)', detail:'45–60 min vélo easy → 15–20 min course à allure footing. Habitue les jambes à courir « après ».'};
+  }
+  var DAYS=['Lundi','Mardi','Mercredi','Jeudi','Vendredi','Samedi','Dimanche'];
+  function placeFirstFree(days,used,pref,item){
+    for(var i=0;i<pref.length;i++){ if(!used[pref[i]]){ days[pref[i]].push(item); used[pref[i]]=true; return true; } }
+    for(var d=0;d<7;d++){ if(!used[d]){ days[d].push(item); used[d]=true; return true; } }
+    return false;
+  }
+  function assignDays(wk){
+    var rest=PLAN.meta.restDay, longd=PLAN.meta.longDay;
+    var days=[[],[],[],[],[],[],[]];
+    if(wk.race){
+      var rd=longd; days[rd].push(wk.sessions.filter(function(s){return s.cat==='race';})[0]||wk.sessions[0]);
+      var sh=wk.sessions.filter(function(s){return s.cat==='ef';})[0]; if(sh) days[(rd+5)%7].push(sh);
+      return days;
+    }
+    var used={}; used[rest]=true;
+    if(longd===rest) longd=(rest+1)%7;
+    var g=function(cat,hard){ return wk.sessions.filter(function(s){return s.cat===cat && (hard===undefined || (!!s.hard)===hard);}); };
+    var overflow=[];
+    var long=g('long')[0];
+    if(long){ days[longd].push(long); used[longd]=true; }
+    var qpref=[1,3,2,4,0,5,6];
+    g('quality').forEach(function(q){ placeFirstFree(days,used,qpref,q); });      // qualité course = espacée
+    g('bike',true).forEach(function(x){ placeFirstFree(days,used,qpref,x); });    // vélo PMA/seuil = espacé comme la qualité
+    var brick=g('brick')[0];
+    if(brick) placeFirstFree(days,used,[5,2,4,3,1],brick);
+    var fillPref=[2,4,5,1,3,0,6];
+    g('bike',false).forEach(function(x){ if(!placeFirstFree(days,used,fillPref,x)) overflow.push(x); }); // vélo endurance
+    g('ef').forEach(function(f){ if(!placeFirstFree(days,used,fillPref,f)) overflow.push(f); });
+    var renfo=g('renfo')[0];
+    if(renfo){
+      var done=false;
+      for(var d=0;d<7;d++){ if(d!==rest && days[d].length===1 && (days[d][0].cat==='ef'||(days[d][0].cat==='bike'&&!days[d][0].hard))){ days[d].push(renfo); done=true; break; } }
+      if(!done) done=placeFirstFree(days,used,[3,2,4,1,5,0,6],renfo);
+      if(!done) overflow.push(renfo);
+    }
+    // débordement → doubler sur un jour facile (footing ou vélo endurance / renfo), jamais qualité/longue/repos
+    overflow.forEach(function(x){
+      for(var d=0;d<7;d++){ if(d!==rest && days[d].length && days[d].every(function(s){return s.cat==='ef'||(s.cat==='bike'&&!s.hard)||s.cat==='renfo';})){ days[d].push(x); return; } }
+      for(var d=0;d<7;d++){ if(d!==rest){ days[d].push(x); return; } }
+    });
+    return days;
+  }
+  function renderWeekDetail(i){
+    if(!PLAN||!$('weekdetail')) return;
+    var wk=PLAN.weeks[i]; if(!wk) return;
+    var bc={long:'b-long',quality:'b-quality',ef:'b-ef',renfo:'b-renfo',brick:'b-brick',race:'b-race',bike:'b-bike'};
+    var bl={long:'Sortie longue',quality:'Qualité',ef:'Footing',renfo:'Renfo',brick:'Brique',race:'Course',bike:'Vélo'};
+    var runCount=wk.sessions.filter(function(s){return s.cat==='long'||s.cat==='quality'||s.cat==='ef'||s.cat==='race';}).length;
+    var bikeN=wk.sessions.filter(function(s){return s.cat==='bike';}).length;
+    var h='<div class="wd-head"><span class="wd-title">Semaine '+wk.n+'</span>'+
+      '<span class="wd-meta">'+wk.phaseLabel+(wk.recovery?' · assimilation':'')+'</span>'+
+      '<span class="wd-meta">· '+wk.sessions.length+' séances (dont '+runCount+' à pied'+(bikeN?', '+bikeN+' vélo':'')+') · ~'+wk.volume+' km course</span></div>';
+    var days=assignDays(wk), rest=PLAN.meta.restDay;
+    h+='<div class="cal">';
+    for(var d=0;d<7;d++){
+      var isRest=(days[d].length===0);
+      h+='<div class="cal-day'+(isRest?' rest':'')+'"><div class="dn">'+DAYS[d]+'</div>';
+      if(isRest){ h+='<div class="cal-rest">Repos / récupération</div>'; }
+      else{
+        h+='<div class="cal-items">';
+        days[d].forEach(function(s){
+          h+='<div class="ci"><span class="sess-badge '+bc[s.cat]+'">'+bl[s.cat]+'</span><div class="cb"><span class="st">'+s.title+'</span>'+s.detail+'</div></div>';
+        });
+        h+='</div>';
+      }
+      h+='</div>';
+    }
+    h+='</div>';
+    h+='<div class="wd-tip">💡 Ajuste le jour de repos et de sortie longue ci-dessus. Les séances dures sont espacées d\'au moins 48 h ; le renfo se cale sur un jour facile.</div>';
+    $('weekdetail').innerHTML=h;
+  }
+
+  // live reference table
+  function renderRef(){
+    var vma=parseFloat($('vma').value)||14;
+    var rows=[
+      ['Endurance / footing','continu','65–72 %',0.68,'—'],
+      ['Sortie longue','continu','68–75 %',0.72,'—'],
+      ['Allure spécifique','blocs 2–5 km','80–90 %',0.85,'1–2 min ou continu'],
+      ['Seuil','1000–2000 m','88–90 %',0.89,'1–2 min'],
+      ['VMA longue','500–1000 m','95–100 %',0.98,'≈ moitié de l\'effort'],
+      ['VMA courte','200–400 m / 30–45 s','100–105 %',1.03,'≈ durée de l\'effort (trot)']
+    ];
+    var h='';
+    rows.forEach(function(r){
+      h+='<tr><td class="z">'+r[0]+'</td><td class="u">'+r[1]+'</td><td class="u">'+r[2]+'</td><td class="n">'+fmtPace(paceAt(vma,r[3]))+'/km</td><td class="u">'+r[4]+'</td></tr>';
+    });
+    $('refbody').innerHTML=h;
+  }
+
+  function build(){
+    var vma=parseFloat($('vma').value)||14;
+    var goal=parseInt($('goal').value,10);
+    var weeks=Math.max(4,Math.min(30,parseInt($('weeks').value,10)||12));
+    var hours=parseFloat($('hours').value)||5;
+    var sess=Math.max(3,Math.min(6,parseInt($('sessions').value,10)||4));
+    var level=parseInt($('level').value,10);
+    var mixte=$('mixte').checked;
+    var nBike=$('bike')?Math.max(0,Math.min(4,parseInt($('bike').value,10)||0)):0;
+
+    // race pace % by goal
+    var racePct={5:0.92,10:0.90,21:0.85,42:0.80}[goal];
+    var goalName={5:'5 km',10:'10 km',21:'Semi',42:'Marathon'}[goal];
+
+    // long run params (km) by goal — start & peak (progression = interpolation start→peak)
+    var LR={5:{start:8,peak:12},10:{start:10,peak:15},21:{start:12,peak:19},42:{start:16,peak:30}}[goal];
+    var lvlAdj={1:-2,2:0,3:2}[level];
+    LR={start:Math.max(6,LR.start+lvlAdj), peak:LR.peak+lvlAdj};
+
+    // taper length
+    var taper = goal>=42?3:(goal>=21?2:2);
+    var repriseWk = (weeks>=9 && level<3)?1:0;
+    var buildWeeks = weeks - taper - repriseWk;
+    if(buildWeeks<2){taper=Math.max(1,taper-1); buildWeeks=weeks-taper-repriseWk;}
+    var fondWeeks = Math.round(buildWeeks*0.45);
+    var speWeeks = buildWeeks - fondWeeks;
+
+    // volume : le vélo est DÉDUIT des heures dispo (≈1 h/séance vélo), le reste va à la course
+    var avgSpeed = vma*0.66;
+    var bikeHours = nBike*1.0;
+    var runHours = Math.max(1.5, hours - bikeHours);
+    var weekKm = Math.round(runHours*avgSpeed);
+
+    var kmPace=fmtPace(paceAt(vma,{5:0.92,10:0.90,21:0.85,42:0.80}[goal]));
+
+    var rows=[]; var phaseOf=[];
+    for(var w=1; w<=weeks; w++){
+      var idx=w; var phase;
+      if(w<=repriseWk) phase='rep';
+      else if(w> weeks-taper) phase='tap';
+      else if(w<=repriseWk+fondWeeks) phase='fond';
+      else phase='spe';
+      phaseOf.push(phase);
+    }
+
+    // long-run progression across build, recovery every 3rd build week
+    var buildCount=0;
+    var html=''; var weeksData=[];
+    var phLabel={rep:'Reprise',fond:'Fondation',spe:'Spécifique',tap:'Affûtage'};
+    for(var w=1; w<=weeks; w++){
+      var phase=phaseOf[w-1];
+      var recovery=false, race=(w===weeks);
+      var longKm, quality, mixteCell, easyN;
+
+      if(phase==='rep'){
+        longKm=Math.round(LR.start*0.7);
+        quality='Lignes droites : 6 × 100 m rapides en fin de footing';
+        easyN=sess-1;
+      } else if(phase==='tap'){
+        var tw = w-(weeks-taper); // 1..taper
+        var frac = taper===3?[0.7,0.5,0.35][tw-1]:[0.55,0.4][tw-1];
+        longKm=Math.round(LR.peak*frac);
+        if(tw<taper) quality='Rappels d\'allure : 20 min facile + 5 × 1 min à '+fmtPace(paceAt(vma,racePct))+'/km';
+        else quality='Déblocage : 15 min très facile + 3 × 30 s allure course';
+        easyN=Math.max(1,sess-2);
+      } else {
+        buildCount++;
+        var B=fondWeeks+speWeeks;
+        recovery=(buildCount%3===0)&&(buildCount!==B); // jamais la dernière semaine de bloc
+        var fr=(B>1)?(buildCount-1)/(B-1):1;
+        var base=LR.start+fr*(LR.peak-LR.start);      // progression vers le pic
+        longKm=Math.round(recovery?base*0.75:base);
+        if(phase==='fond'){
+          quality = recovery ? '20 min échauffement + 8 × 30/30 (30 s vite / 30 s footing) à '+fmtPace(paceAt(vma,1.05))+'/km + 10 min retour au calme'
+                             : '20 min échauffement + 2 × (6 × 30/30) à '+fmtPace(paceAt(vma,1.05))+'/km, récup 3 min footing entre les 2 blocs — ou 6 × 400 m à '+fmtPace(paceAt(vma,1.0))+'/km, récup 1 min + 10 min retour au calme';
+        } else {
+          quality = recovery ? '15 min échauffement + 2 × 8 min à '+fmtPace(paceAt(vma,0.89))+'/km, récup 2 min footing lent entre les blocs + 10 min retour au calme'
+                             : '20 min échauffement + 3 × 8 min à '+fmtPace(paceAt(vma,0.89))+'/km, récup 2 min footing lent entre les blocs + 10 min retour au calme';
+        }
+      }
+      // 2e qualité en spécifique si 5+ séances
+      var q2txt = (phase==='spe' && sess>=5 && !recovery) ? 'VMA d\'entretien : 5 × 300 m à '+fmtPace(paceAt(vma,1.0))+'/km' : '';
+      var nQ = 1 + (q2txt?1:0);
+      var slots = Math.max(0, sess - 1 - nQ);       // footings restants (hors longue & qualité)
+      var brick = (mixte && (phase==='fond'||phase==='spe') && !race);
+      var efCount = Math.max(0, slots - (brick?1:0));
+
+      var vol = race? Math.round(weekKm*0.35) : (recovery? Math.round(weekKm*0.75) : (phase==='tap'? Math.round(weekKm*[0.7,0.5,0.4][Math.min(2,(w-(weeks-taper))-1)]) : weekKm));
+
+      // liste détaillée des séances de la semaine
+      var sessions=[];
+      if(race){
+        sessions.push({cat:'ef',title:'Footing de déblocage (2–3 j avant)',detail:'20 min très facile + 3 × 30 s à allure course. Jambes fraîches.'});
+        sessions.push({cat:'race',title:'Jour J — '+goalName,detail:'Objectif <b>'+kmPace+'/km</b>. Pars contrôlée, finis plus vite. Bonne course !'});
+        sessions.push({cat:'renfo',title:'Mobilité douce seulement',detail:'Pas de renfo cette semaine — on préserve la fraîcheur.'});
+      } else {
+        var longObj = (phase==='spe' && !recovery) ? longVaried(goal,longKm,vma,racePct) : {html:'<b>'+longKm+' km</b> en endurance facile ('+fmtPace(paceAt(vma,0.72))+'/km)'};
+        sessions.push({cat:'long',title:(phase==='spe'&&!recovery)?'Sortie longue mixte':'Sortie longue ('+longKm+' km)',detail:longObj.html});
+        sessions.push({cat:'quality',title:(phase==='fond'?'VMA':(phase==='spe'?'Seuil':(phase==='rep'?'Lignes droites':'Rappels d\'allure'))),detail:quality});
+        if(q2txt) sessions.push({cat:'quality',title:'VMA d\'entretien',detail:q2txt});
+        for(var e=0;e<efCount;e++) sessions.push({cat:'ef',title:'Footing facile',detail:'30–50 min en endurance ('+fmtPace(paceAt(vma,0.68))+'/km), en aisance respiratoire.'});
+        if(brick){ var bd=brickDesc(phase); sessions.push({cat:'brick',title:bd.title,detail:bd.detail}); }
+        var rd=renfoDesc(phase); sessions.push({cat:'renfo',title:rd.title,detail:rd.detail});
+        // séances vélo dédiées (volume déjà déduit des heures)
+        if(nBike>0){
+          var nb=(phase==='tap')?Math.min(1,nBike):nBike;
+          var hardN=(!recovery && (phase==='fond'||phase==='spe') && nb>=2)?1:0;
+          for(var bh=0; bh<hardN; bh++) sessions.push({cat:'bike',hard:true,title:'Vélo — PMA / seuil',detail:'~1 h : 20 min échauffement + 5–6 × 3 min en force soutenue (ressenti 8/10, souffle court, récup 2–3 min) + retour au calme.'});
+          for(var be=0; be<nb-hardN; be++) sessions.push({cat:'bike',hard:false,title:'Vélo — endurance',detail:'1 h–1 h 30 à allure facile (Z2, tu peux parler). Volume aérobie sans impact articulaire.'});
+        }
+      }
+      weeksData.push({n:w,phase:phase,phaseLabel:phLabel[phase],recovery:recovery,race:race,volume:vol,sessions:sessions});
+
+      // ligne du tableau récap
+      var bikeCount=sessions.filter(function(s){return s.cat==='bike';}).length;
+      var others=[];
+      if(efCount>0) others.push(efCount+' × footing facile');
+      if(bikeCount>0) others.push(bikeCount+' × vélo');
+      if(brick) others.push('1 × enchaînement (brique)');
+      if(!race) others.push('1 × renfo '+((phase==='tap')?'léger':'30 min'));
+      if(others.length===0) others.push('repos');
+
+      var longCell;
+      if(race){ longCell='<b>COURSE — '+goalName+'</b> à '+kmPace+'/km'; }
+      else if(phase==='spe' && !recovery){ longCell=longVaried(goal,longKm,vma,racePct).html; }
+      else { longCell='<b>'+longKm+' km</b> facile'; }
+      var qCell = race ? 'Objectif : '+goalName+' · '+kmPace+'/km' : (quality+(q2txt?' · + '+q2txt:''));
+
+      html+='<tr data-wk="'+(w-1)+'" class="'+(race?'race':(recovery?'recovery':''))+'">'+
+        '<td class="wk">S'+w+'<br><span class="phbadge '+phase+'">'+phLabel[phase]+(recovery?' · récup':'')+'</span></td>'+
+        '<td class="work">'+longCell+'</td>'+
+        '<td class="work">'+qCell+'</td>'+
+        '<td class="work">'+others.join('<br>')+'</td>'+
+        '<td class="mono">~'+vol+' km</td>'+
+      '</tr>';
+    }
+
+    var summary='<div class="summary">'+
+      '<div class="sc"><div class="k">Objectif</div><div class="v">'+goalName+'</div></div>'+
+      '<div class="sc"><div class="k">Allure cible</div><div class="v">'+kmPace+'<small>/km</small></div></div>'+
+      '<div class="sc"><div class="k">Durée du plan</div><div class="v">'+weeks+'<small> sem.</small></div></div>'+
+      '<div class="sc"><div class="k">Fondation</div><div class="v">'+fondWeeks+'<small> sem.</small></div></div>'+
+      '<div class="sc"><div class="k">Spécifique</div><div class="v">'+speWeeks+'<small> sem.</small></div></div>'+
+      '<div class="sc"><div class="k">Affûtage</div><div class="v">'+taper+'<small> sem.</small></div></div>'+
+      '<div class="sc"><div class="k">Volume course</div><div class="v">~'+weekKm+'<small> km/sem</small></div></div>'+
+      (nBike>0?'<div class="sc"><div class="k">Vélo</div><div class="v">'+nBike+'<small> séance'+(nBike>1?'s':'')+'/sem</small></div></div>':'')+
+      '</div>';
+
+    var legend='<div class="phaselegend">'+
+      '<span class="ph-rep"><i></i>Reprise</span><span class="ph-fond"><i></i>Fondation</span>'+
+      '<span class="ph-spe"><i></i>Spécifique</span><span class="ph-tap"><i></i>Affûtage</span>'+
+      '<span style="color:var(--muted)">Ligne grisée = semaine allégée (récup)</span></div>';
+
+    var table='<div class="tblwrap"><table class="plan clickrows"><thead><tr>'+
+      '<th>Sem.</th><th>Sortie longue</th><th>Séance(s) de qualité</th><th>Autres séances</th><th>Vol.</th>'+
+      '</tr></thead><tbody>'+html+'</tbody></table></div>';
+
+    var tip='<div class="note"><b>Comment lire :</b> chaque semaine = 1 sortie longue + 1 séance de qualité (2 en spécifique si tu as 5+ séances) + des footings/mixtes. On monte 2–3 semaines puis on allège (ligne grisée). <b>En phase spécifique, la sortie longue devient « mixte » : elle s\'allonge (jusqu\'à ~18 km pour un semi) et intègre plusieurs blocs alternant les allures</b> (allure objectif / float un peu plus lent) — la séance signature d\'approche, comme te la construit ta coach. La séance de qualité reste alors du <b>seuil</b>. L\'affûtage réduit le volume mais garde de courtes touches de vitesse. Cale tes footings/mixtes courts les jours « faciles », jamais la veille d\'une séance de qualité ou de la sortie longue.</div>';
+
+    $('out').innerHTML=summary+legend+table+tip;
+
+    // modèle de données + panneau détail par semaine
+    var restDay=$('restday')?(parseInt($('restday').value,10)||0):0;
+    var longDay=$('longday')?(parseInt($('longday').value,10)):6; if(isNaN(longDay))longDay=6;
+    PLAN={weeks:weeksData, meta:{restDay:restDay, longDay:longDay}};
+    if($('weekpanel')){
+      $('weekpanel').hidden=false;
+      var opts=''; weeksData.forEach(function(wk){opts+='<option value="'+(wk.n-1)+'">Semaine '+wk.n+' — '+wk.phaseLabel+(wk.recovery?' (assimilation)':'')+(wk.race?' (course)':'')+'</option>';});
+      if($('weekpick')){
+        $('weekpick').innerHTML=opts;
+        var def=0; for(var k=0;k<weeksData.length;k++){ if(weeksData[k].phase==='spe'){ def=k; break; } }
+        $('weekpick').value=def;
+        renderWeekDetail(def);
+        $('weekpick').onchange=function(){renderWeekDetail(parseInt(this.value,10));};
+      }
+      if(document.querySelectorAll){
+        var trs=document.querySelectorAll('table.plan.clickrows tbody tr');
+        for(var t=0;t<trs.length;t++){ trs[t].onclick=(function(idx){return function(){ if($('weekpick'))$('weekpick').value=idx; renderWeekDetail(idx); if($('weekpanel'))$('weekpanel').scrollIntoView({behavior:'smooth',block:'nearest'}); };})(parseInt(trs[t].getAttribute('data-wk'),10)); }
+      }
+    }
+
+    try{localStorage.setItem('atelier_plan',JSON.stringify({goal:goal,vma:vma,weeks:weeks,hours:hours,sess:sess,level:level,mixte:mixte,bike:nBike,restday:restDay,longday:longDay}));}catch(e){}
+    renderRef();
+  }
+
+  // restore
+  try{var s=JSON.parse(localStorage.getItem('atelier_plan')||'null'); if(s){$('goal').value=s.goal;$('vma').value=s.vma;$('weeks').value=s.weeks;$('hours').value=s.hours;$('sessions').value=s.sess;$('level').value=s.level;$('mixte').checked=s.mixte; if(s.bike!==undefined&&$('bike'))$('bike').value=s.bike; if(s.restday!==undefined&&$('restday'))$('restday').value=s.restday; if(s.longday!==undefined&&$('longday'))$('longday').value=s.longday;}}catch(e){}
+
+  $('gen').addEventListener('click',build);
+  $('reset').addEventListener('click',function(){
+    $('goal').value='21';$('vma').value='14';$('weeks').value='12';$('hours').value='5';$('sessions').value='4';$('level').value='2';$('mixte').checked=true;
+    if($('bike'))$('bike').value='0'; if($('restday'))$('restday').value='0'; if($('longday'))$('longday').value='6';
+    try{localStorage.removeItem('atelier_plan');}catch(e){} build();
+  });
+  $('vma').addEventListener('input',renderRef);
+  if($('bike'))$('bike').addEventListener('input',build);
+  if($('restday'))$('restday').addEventListener('change',build);
+  if($('longday'))$('longday').addEventListener('change',build);
+  if($('print'))$('print').addEventListener('click',function(){window.print();});
+  renderRef(); build();
+})();
+</script>
