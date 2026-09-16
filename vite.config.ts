@@ -5,6 +5,11 @@ import { VitePWA } from 'vite-plugin-pwa'
 
 // https://vite.dev/config/
 export default defineConfig({
+  // Prevents Vite from walking up to the parent Freelaunch monorepo's
+  // postcss.config.mjs (a Next.js config using string plugin names, which
+  // isn't valid for Vite's raw PostCSS pipeline). @tailwindcss/vite doesn't
+  // need PostCSS at all, so an empty inline config is enough.
+  css: { postcss: {} },
   plugins: [
     react(),
     tailwindcss(),
