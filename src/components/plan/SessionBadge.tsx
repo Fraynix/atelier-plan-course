@@ -1,6 +1,6 @@
 import type { SessionCategory } from '../../lib/types'
 
-const CATEGORY_LABEL: Record<SessionCategory, string> = {
+export const CATEGORY_LABEL: Record<SessionCategory, string> = {
   long: 'Sortie longue',
   quality: 'Qualité',
   ef: 'Footing',

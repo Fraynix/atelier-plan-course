@@ -1,7 +1,9 @@
 import { useMemo, useState } from 'react'
+import { AdjustmentGuide } from './components/adjust/AdjustmentGuide'
 import { ExportButtons } from './components/export/ExportButtons'
 import { ExplainCards, HouseCards } from './components/education/InfoCards'
 import { FoundationDiagram } from './components/education/FoundationDiagram'
+import { FormulaCards, SessionTypeCards } from './components/education/SessionBricksExplainer'
 import { SettingsForm } from './components/form/SettingsForm'
 import { Disclaimer } from './components/layout/Disclaimer'
 import { ThemeToggle } from './components/layout/ThemeToggle'
@@ -80,7 +82,42 @@ function App() {
           les fondations — chercher la vitesse sans base aérobie, c'est bâtir sur du sable (blessure, plateau).
         </p>
         <FoundationDiagram />
+        <p className="mb-5 max-w-[68ch] text-[var(--ink-2)]">
+          Pour <b className="font-semibold text-[var(--ink)]">ton</b> plan de {plan.meta.weeks} semaines :{' '}
+          {plan.meta.repriseWeeks > 0 && <>{plan.meta.repriseWeeks} sem. de reprise, </>}
+          {plan.meta.fondationWeeks} sem. de fondation, {plan.meta.specificWeeks} sem. de spécifique et{' '}
+          {plan.meta.taperWeeks} sem. d'affûtage. Change les réglages ci-dessus et ces chiffres — et le tableau plus
+          haut — se recalculent aussitôt.
+        </p>
         <HouseCards />
+      </section>
+
+      <section className="noprint mb-11">
+        <p className="mb-1 font-sans text-xs font-bold uppercase tracking-[0.16em] text-[var(--brand)]">
+          Les briques de séance
+        </p>
+        <h2 className="mb-1 text-2xl font-extrabold tracking-tight text-[var(--ink)]">
+          D'où viennent tes allures
+        </h2>
+        <p className="mb-5 max-w-[68ch] text-[var(--ink-2)]">
+          Tout part de la VMA : chaque intensité s'exprime en <b>pourcentage</b> d'elle. On calcule une vitesse
+          cible, puis on la traduit en allure et en temps par distance. Voici les quatre formules — et surtout{' '}
+          <i>pourquoi</i> elles sont construites ainsi.
+        </p>
+        <FormulaCards />
+
+        <h3 className="mb-1 mt-8 text-xl font-extrabold tracking-tight text-[var(--ink)]">
+          Le rôle de chaque séance
+        </h3>
+        <p className="mb-5 max-w-[68ch] text-[var(--ink-2)]">
+          Une semaine de plan combine plusieurs « briques », chacune avec un objectif physiologique précis. Voici ce
+          que chacune construit, et pourquoi elle est là.
+        </p>
+        <SessionTypeCards />
+      </section>
+
+      <section className="noprint mb-11">
+        <AdjustmentGuide />
       </section>
 
       <section className="mb-11">

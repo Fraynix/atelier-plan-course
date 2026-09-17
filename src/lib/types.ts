@@ -127,3 +127,17 @@ export interface Plan {
 }
 
 export type WeekSchedule = Session[][]
+
+/** How a runner reports feeling today, from best to most concerning. */
+export type DailyState = 'fresh' | 'tired' | 'very_tired' | 'niggle' | 'pain'
+
+/** What to do about today's planned session, from least to most conservative. */
+export type AdjustmentLevel = 'proceed' | 'reduce' | 'rest' | 'seek_care'
+
+export interface AdjustmentAdvice {
+  level: AdjustmentLevel
+  headline: string
+  advice: string
+  /** What to do instead of the planned session, when level isn't 'proceed'. */
+  swap?: string
+}
